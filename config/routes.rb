@@ -77,6 +77,12 @@ Rails.application.routes.draw do
 
   # Routes for the User account:
 
+#Home page
+  get("/", { :controller => "users", :action => "index" })
+  get("/users", { :controller => "users", :action => "index" })
+  #Users
+  get("/users/:username", {:controller => "users", :action => "show"})
+
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD
