@@ -13,4 +13,12 @@ class UsersController < ApplicationController
     render({ :template => "users/show.html.erb" })
   end
 
+  def feed
+    username = params.fetch("username")
+    @user = User.where({ :username => username }).at(0)
+
+    render({ :template => "users/feed.html.erb" })
+  end
+
+
 end
