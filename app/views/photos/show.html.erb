@@ -54,6 +54,31 @@
       <dd>
         <%= @the_photo.comments_count %>
       </dd>
+
+  <dt>Fans</dt>
+  <dd>
+  <% fans = Array.new %>
+  <% @the_photo.fans.each do |fan| %>
+  <% fans.push(fan.username)%>
+  <% end %>
+  <%= fans.join(', ') %>
+  </dd>
+
+  <dt>Add a fan</dt>
+  <dd>
+<% if @the_photo.fans.include? @current_user %>
+
+<a href="/delete_like/<%=@the_photo.likes.where({ :fan_id => @current_user.id }).first.id%>"> Unlike </a>
+
+<% else %>
+    <form action="/insert_like" method="post">
+      <input type="hidden" value="<%=@the_photo.id%>" name="query_photo_id">
+      <button>Like</button>
+    </form>
+<% end %>
+  </dd>
+
+
             <dt>
         Delete photo
       </dt>

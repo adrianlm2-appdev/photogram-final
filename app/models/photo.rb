@@ -6,6 +6,7 @@
 #  caption        :string
 #  comments_count :integer
 #  image          :string
+#  imageupload    :string
 #  likes_count    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -24,6 +25,6 @@ class Photo < ApplicationRecord
   validates(:owner_id, { :presence => true })
   validates(:image, { :presence => true })
 
-  #mount_uploader :image, ImageUploader
+  mount_uploader :imageupload, ImageuploaderUploader
 
 end
