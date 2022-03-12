@@ -8,9 +8,12 @@
 
   <dt>Edit user</dt>
   <dd>
-    <form action="/update_user/<%= @user.id %>" >
+    <form action="/modify_user" method="post">
       <label for="browser_username">Username</label>
       <input id="browser_username" type="text" name="input_username" placeholder="Enter a username..." value="<%= @user.username %>">
+
+      <label for="browser_private">Private?</label>
+      <input id="browser_private" type="checkbox" name="query_private" >
 
       <button>Update user</button>
     </form>

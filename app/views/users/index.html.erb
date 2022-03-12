@@ -11,31 +11,54 @@
 
 <table border="1">
   <tr>
-    <th>
-      ID
-    </th>
 
     <th>
       Username
     </th>
 
+    <th>
+      Private?
+    </th>
+
+    <th></th>
     <th></th>
   </tr>
 
   <% @users.each do |user| %>
   <tr>
-    <td>
-      <%= user.id %>
-    </td>
 
     <td>
       <%= user.username %>
     </td>
-
     <td>
+      <% if user.private == true %>
+      Yes
+      <% elsif user.private == false %>
+      No 
+      <% end %>
+      </td>
+    <td>
+    <% if session.fetch(:user_id) != nil %>
+        <% if @following.include? user.username %>
+        <a href="/users/<%= user.username %>">Unfollow</a>
+        <% else %>
+
+            <form action="/insert_follow_request" method="post">
+              <input type="hidden" name="query_recipient_id" value="<%= user.id %>">
+
+              <button>
+                Follow
+              </button>
+            </form>
+      <% end %>
+      <% end %>
+      </td>
+    </td>
+        <td>
       <a href="/users/<%= user.username %>">Show details</a>
     </td>
   </tr>
   
   <% end %>
 </table>
+
