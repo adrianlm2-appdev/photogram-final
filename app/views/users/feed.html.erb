@@ -30,6 +30,17 @@
   </dd>
 </dl>
 
+<% accepted = Array.new %>
+
+<% @user.sent_follow_requests.each do |sent_request| %>
+
+<% if sent_request.status == "accepted" %>
+
+<% accepted.push(User.where({:id => sent_request.recipient_id}).first.username) %>
+<% end %>
+<% end %>
+<%= accepted %>
+
 <nav>
   <ul>
     <li>
@@ -71,6 +82,8 @@
   </tr>
 
   <% @user.feed.each do |photo| %>
+
+  <% if accepted.include? photo.owner.username %>
   <tr>
     <td>
       <img src="<%= photo.image %>">
@@ -94,6 +107,7 @@
       </a>
     </td>
   </tr>
+<% end %>
+<% end %>
 
-  <% end %>
 </table>
